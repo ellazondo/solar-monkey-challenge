@@ -12,9 +12,9 @@ class Database:
             self._create_table()
         except Error as error:
             print(error)
-        finally:
-            if self.connection:
-                self.connection.close()
+        # finally:
+        #     if self.connection:
+        #         self.connection.close()
     
     def _create_table(self):
         try:
@@ -32,5 +32,14 @@ class Database:
         
 
     def write(self, latitude, longitude, city, country):
-        pass
+        try:
+            cursor = self.connection.cursor()
+            cursor.execute( 
+            "INSERT INTO geolocation (latitude, longitude, city, country_code) VALUES (?, ?, ?,?)", 
+            (latitude, longitude, city, country))
+            self.connection.commit()
+            print("Data successfully inserted into database")
+        except Error as error:
+            print(f"Error: {error}")
+
 

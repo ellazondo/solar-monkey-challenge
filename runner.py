@@ -18,6 +18,10 @@ longitude = float(ui.get_longitude())
 response = client.get(latitude, longitude)
 
 if response:
-    print(response)
+    city = response[0]["name"]
+    country = response[0]["country"]
+    database.write(latitude, longitude, city, country)
+    print(f"Your latitude and longitude lands on {city}, {country}.")
+
 else:
     print(f"Error: Unable to fetch data from API.")
