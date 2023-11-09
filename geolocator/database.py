@@ -12,9 +12,20 @@ class Database:
             self._create_table()
         except Error as error:
             print(error)
-        # finally:
-        #     if self.connection:
-        #         self.connection.close()
+
+    def search(self, latitude, longitude):
+        try:
+            cursor = self.connection.cursor()
+            cursor.execute("SELECT latitude, longitude FROM geolocation")
+            result = cursor.fetchone()
+            if result: 
+                return result
+            else: 
+                return None
+        except Error as error:
+            print (f"Error: {error}")
+            return None 
+
     
     def _create_table(self):
         try:
