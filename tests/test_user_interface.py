@@ -18,5 +18,5 @@ class TestUserInterface(TestCase):
 
     def test_prints_the_answer(self):
         sys.stdin = StringIO("The Answer")
-        self.ui.hello()
+        self.ui.get_longitude()
         self.assertIn("The Answer", self.output.getvalue())

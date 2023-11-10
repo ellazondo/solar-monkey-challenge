@@ -17,7 +17,7 @@ class Database:
         try:
             cursor = self.connection.cursor()
             cursor.execute("SELECT city, country_code FROM geolocation WHERE latitude BETWEEN ? AND ? AND longitude BETWEEN ? AND ?", (latitude-range, latitude + range, longitude - range, longitude + range))
-            result = cursor.fetchone()
+            result = cursor.fetchall()
             if result: 
                 return result
             else: 

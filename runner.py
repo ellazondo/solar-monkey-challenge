@@ -18,8 +18,11 @@ longitude = float(ui.get_longitude())
 current_db_data = database.search(latitude, longitude)
 
 if current_db_data:
-    city, country_code = current_db_data
-    print(f"{city}, {country_code} was already found in the database")
+    print("Within a 3% range, the latitude and longitude provided match the following city/cities in our database:")
+    for city, country_code in current_db_data:
+        print(f"{city}, {country_code}")
+    # city, country_code = current_db_data
+    # print(f"{city}, {country_code} was already found in the database")
 else: 
     print(f"latitude:{latitude}, longitude:{longitude} was not found in database, perfoming API fetch now.")
     response = client.get(latitude, longitude)
