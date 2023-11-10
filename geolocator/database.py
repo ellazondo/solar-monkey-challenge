@@ -13,10 +13,10 @@ class Database:
         except Error as error:
             print(error)
 
-    def search(self, latitude, longitude):
+    def search(self, latitude, longitude, range=0.03):
         try:
             cursor = self.connection.cursor()
-            cursor.execute("SELECT latitude, longitude FROM geolocation")
+            cursor.execute("SELECT city, country_code FROM geolocation WHERE latitude BETWEEN ? AND ? AND longitude BETWEEN ? AND ?", (latitude-range, latitude + range, longitude - range, longitude + range))
             result = cursor.fetchone()
             if result: 
                 return result

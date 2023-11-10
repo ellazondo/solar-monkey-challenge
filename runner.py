@@ -18,18 +18,15 @@ longitude = float(ui.get_longitude())
 current_db_data = database.search(latitude, longitude)
 
 if current_db_data:
-    latitude, longitude = current_db_data
-    print(f"{latitude}, {longitude} was already found in the database")
+    city, country_code = current_db_data
+    print(f"{city}, {country_code} was already found in the database")
 else: 
-    print("not found in database: perfoming API fetch")
-
-# response = client.get(latitude, longitude)
-
-# if response:
-#     city = response[0]["name"]
-#     country = response[0]["country"]
-#     database.write(latitude, longitude, city, country)
-#     print(f"Your latitude and longitude lands on {city}, {country}.")
-
-# else:
-#     print(f"Error: Unable to fetch data from API.")
+    print(f"latitude:{latitude}, longitude:{longitude} was not found in database, perfoming API fetch now.")
+    response = client.get(latitude, longitude)
+    if response:
+        city = response[0]["name"]
+        country = response[0]["country"]
+        database.write(latitude, longitude, city, country)
+        print(f"Your latitude and longitude lands on {city}, {country}.")
+    else:
+        print(f"Error: Unable to fetch data from API.")
