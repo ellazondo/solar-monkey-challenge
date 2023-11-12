@@ -10,5 +10,5 @@ class TestClient(TestCase):
         self.client = Client("TEST_API_KEY")
 
     def test_gets_the_geolocation_information(self):
-        response = self.client.get(51.5128, -0.0918)
-        self.assertEqual(2 + 2 , 4)
+        response = self.client.get(39.7392364, -104.984862)
+         

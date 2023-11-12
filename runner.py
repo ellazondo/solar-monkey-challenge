@@ -21,10 +21,12 @@ if current_db_data:
     print("Within a 3% range, the latitude and longitude provided match the following city/cities in our database:")
     for city, country_code in current_db_data:
         print(f"{city}, {country_code}")
-    # city, country_code = current_db_data
-    # print(f"{city}, {country_code} was already found in the database")
+    
 else: 
     print(f"latitude:{latitude}, longitude:{longitude} was not found in database, perfoming API fetch now.")
+    #potential security vulnerability known as SQL injection. Change this to use parameterized queries or prepared
+    #statements when interacting with a database. Parameterized queries ensure that user input is treated as data rather
+    #than executable SQL code, preventing SQL injection attacks.
     response = client.get(latitude, longitude)
     if response:
         city = response[0]["name"]
